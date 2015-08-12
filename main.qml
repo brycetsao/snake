@@ -68,10 +68,17 @@ Window {
                 height: width
                 transformOrigin: Item.Center
                 scale: duration != 0 ? 1 : 0
+                opacity: duration != 0 ? 1 : 0
                 radius: duration < 0 ? 5 : 0
                 Behavior on scale {
                     NumberAnimation {
-                        duration: 10
+                        duration: 80
+                        easing.type: Easing.OutExpo
+                    }
+                }
+                Behavior on opacity {
+                    NumberAnimation {
+                        duration: 80
                         easing.type: Easing.OutExpo
                     }
                 }
@@ -87,7 +94,7 @@ Window {
        onTriggered: {
            // check if dead
            if(currentIndex < 0 || currentIndex >= 1600 ||
-                   Math.abs((currentIndex % 40) - (lastIndex % 40) == 39) ||
+                   Math.abs((currentIndex % 40) - (lastIndex % 40)) == 39 ||
                    cell.itemAt(currentIndex).duration > 0) {
                stop();
            }
